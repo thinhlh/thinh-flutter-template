@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tfc/app/home/presentation/bloc/bloc/home_bloc.dart';
 import 'package:tfc/app/home/presentation/pages/home_page.dart';
+import 'package:tfc/app/home/presentation/provider/home_provider.dart';
 import 'package:tfc/util/route_util.dart';
 
 class Routes {
@@ -17,8 +17,8 @@ class Routes {
       case Routes.home:
         return MaterialPageRoute(
           settings: routeSettings,
-          builder: (_) => RouteUtil.createPageBlocProvider<HomeBloc>(
-            bloc: (_) => HomeBloc(),
+          builder: (_) => RouteUtil.createPageProvider<HomeProvider>(
+            provider: (_) => HomeProvider(),
             child: HomePage(),
           ),
         );
