@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tfc/app/home/presentation/provider/home_provider.dart';
 import 'package:tfc/base/presentation/pages/p_loading.dart';
 import 'package:tfc/generated/locale_keys.g.dart';
@@ -11,21 +12,17 @@ class HomePage extends LoadingPage<HomeProvider> {
   Widget buildPage(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        provider.showDialog(
-          context,
-          const AlertDialog(
-            content: Text('This is a dialog.'),
-          ),
-        );
-
-        await Future.delayed(const Duration(seconds: 2));
-
-        provider.dismissDialog(context, result: 'OK');
+        provider.showLoading(true);
+        await provider.checkConnection();
+        provider.showLoading(false);
       },
       child: Center(
-        child: Text(
-          tr(LocaleKeys.general),
-          style: const TextStyle(fontSize: 24),
+        child: Selector<HomeProvider, String>(
+          selector: (_, provider) => provider.title,
+          builder: (_, value, child) => Text(
+            value,
+            style: const TextStyle(fontSize: 24),
+          ),
         ),
       ),
     );

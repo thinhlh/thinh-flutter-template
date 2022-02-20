@@ -1,3 +1,1 @@
-abstract class BaseException implements Exception {
-  BaseException();
-}
+abstract class BaseException implements Exception {}

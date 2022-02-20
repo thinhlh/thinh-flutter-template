@@ -4,6 +4,7 @@ import 'package:tfc/app/app.dart';
 import 'package:tfc/config/languages.dart';
 import 'package:tfc/core/env/app_config.dart';
 import 'package:tfc/core/env/env.dart';
+import 'package:tfc/util/dependency_initializer.dart';
 
 class AppRunner {
   AppRunner._();
@@ -25,6 +26,7 @@ class AppRunner {
 
   Future<void> _initializeDependencies() async {
     await EasyLocalization.ensureInitialized();
+    await DependencyInitializer.init();
   }
 
   Future<void> _appConfigurations() async {

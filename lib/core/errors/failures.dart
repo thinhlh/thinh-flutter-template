@@ -5,3 +5,5 @@ import 'package:tfc/base/failure.dart';
 class InitializationFailure extends Failure {
   InitializationFailure() : super(message: tr('message'));
 }
+
+class APIFailure extends Failure {}

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:tfc/base/presentation/providers/base_dialog_provider.dart';
-import 'package:tfc/base/presentation/widgets/app_dialog.dart';
+import 'package:tfc/base/presentation/providers/dialog_provider.dart';
 
 abstract class PageProvider<T extends DialogProvider> extends StatelessWidget {
   PageProvider({Key? key}) : super(key: key);

@@ -2,5 +2,7 @@
 
 abstract class  LocaleKeys {
   static const general = 'general';
+  static const common_default_error = 'common.default_error';
+  static const common = 'common';
 
 }

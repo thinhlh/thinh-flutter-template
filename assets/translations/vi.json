@@ -1,3 +1,6 @@
 {
-    "general":"Thinh Flutter Clean"
+    "general":"Thinh Flutter Clean",
+    "common":{
+        "default_error":"Lỗi không xác định"
+    }
 }

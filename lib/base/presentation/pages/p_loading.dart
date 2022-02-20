@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:tfc/base/presentation/pages/p_provider.dart';
-import 'package:tfc/base/presentation/providers/base_loading_provider.dart';
+import 'package:tfc/base/presentation/providers/loading_provider.dart';
+import 'package:tfc/base/presentation/widgets/w_loading.dart';
+import 'package:tfc/util/app_loading.dart';
 
 abstract class LoadingPage<T extends LoadingProvider> extends PageProvider<T> {
   LoadingPage({Key? key}) : super(key: key);
@@ -15,6 +18,14 @@ abstract class LoadingPage<T extends LoadingProvider> extends PageProvider<T> {
         children: [
           parent,
           buildPage(context),
+          Selector<T, bool>(
+              selector: (_, provider) => provider.isLoading,
+              builder: (_, isLoading, child) {
+                SchedulerBinding.instance?.addPostFrameCallback((_) => isLoading
+                    ? AppLoading.showLoading(context)
+                    : AppLoading.dismissLoading(context));
+                return Container();
+              })
         ],
       ),
     );

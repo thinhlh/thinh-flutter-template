@@ -3,18 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class AppDialog {
-  BuildContext? _context = null;
+  static BuildContext? _context;
   AppDialog._internal();
 
-  static final AppDialog instance = AppDialog._internal();
-
   /// Show the dialog and store it's context for further dismiss
-  Future<T?> showAppDialog<T>(BuildContext context, AlertDialog dialog) {
+  static Future<T?> showAppDialog<T>(BuildContext context, AlertDialog dialog) {
     _context = context;
     return showDialog<T>(context: context, builder: (_) => dialog);
   }
 
-  void dismissAppDialog<T>(BuildContext context, {T? result}) async {
+  static void dismissAppDialog<T>(BuildContext context, {T? result}) async {
     if (_context == null) {
       // Do nothing
     } else {

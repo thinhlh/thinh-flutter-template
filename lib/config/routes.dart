@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:tfc/app/home/presentation/pages/home_page.dart';
 import 'package:tfc/app/home/presentation/provider/home_provider.dart';
 import 'package:tfc/util/route_util.dart';
@@ -18,7 +19,7 @@ class Routes {
         return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => RouteUtil.createPageProvider<HomeProvider>(
-            provider: (_) => HomeProvider(),
+            provider: (_) => HomeProvider(GetIt.I()),
             child: HomePage(),
           ),
         );
