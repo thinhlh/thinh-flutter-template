@@ -1,23 +1,25 @@
-import 'dart:convert';
-
+import 'package:dartz/dartz.dart';
 import 'package:tfc/app/home/data/models/home_connection_model.dart';
-import 'package:tfc/base/data/models/response_model.dart';
-import 'package:tfc/core/env/app_config.dart';
-import 'package:http/http.dart' as http;
+import 'package:tfc/base/failure.dart';
+import 'package:tfc/services/rest_api/models/base_api.dart';
 
-abstract class HomeRemoteDataSource {
-  Future<HomeConnectionModel> checkConnection();
+mixin _EndPoint {
+  final String ping = '/ping';
 }
 
-class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
+abstract class HomeRemoteDataSource extends BaseApi {
+  Future<Either<Failure, HomeConnectionModel>> checkConnection();
+}
+
+class HomeRemoteDataSourceImpl extends HomeRemoteDataSource with _EndPoint {
   @override
-  Future<HomeConnectionModel> checkConnection() async {
-    final result =
-        await http.get(Uri.parse(AppConfig.instance.env.baseUrl + '/ping'));
+  Future<Either<Failure, HomeConnectionModel>> checkConnection() async {
+    try {
+      final result = await get(ping);
 
-    final responseModel =
-        ResponseModel<String>.fromJson(json.decode(result.body)).data;
-
-    return HomeConnectionModel.fromRawData(responseModel);
+      return Right(HomeConnectionModel.fromRawData(result.data));
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
   }
 }

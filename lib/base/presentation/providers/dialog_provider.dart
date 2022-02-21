@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tfc/util/app_dialog.dart';
+import 'package:tfc/services/dialogs/app_dialog.dart';
 
 abstract class DialogProvider with ChangeNotifier {
   Future<T?> showDialog<T>(BuildContext context, AlertDialog dialog) {

@@ -3,8 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:tfc/base/presentation/pages/p_provider.dart';
 import 'package:tfc/base/presentation/providers/loading_provider.dart';
-import 'package:tfc/base/presentation/widgets/w_loading.dart';
-import 'package:tfc/util/app_loading.dart';
+import 'package:tfc/services/dialogs/app_loading.dart';
 
 abstract class LoadingPage<T extends LoadingProvider> extends PageProvider<T> {
   LoadingPage({Key? key}) : super(key: key);
