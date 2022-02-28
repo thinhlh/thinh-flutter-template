@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:tfc/base/models/response_model.dart';
 import 'package:tfc/core/env/app_config.dart';
+import 'package:tfc/services/rest_api/interceptors/dio_logger.dart';
 import 'package:tfc/services/rest_api/interceptors/jwt_interceptor.dart';
 
 abstract class Api {

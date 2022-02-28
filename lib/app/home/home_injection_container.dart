@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:tfc/app/home/data/datasources/home_remote_data_source.dart';
 import 'package:tfc/app/home/data/repositories/home_repository_impl.dart';
 import 'package:tfc/app/home/domain/repositories/home_repository.dart';
