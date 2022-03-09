@@ -1,11 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tfc/app/home/presentation/provider/home_provider.dart';
-import 'package:tfc/base/presentation/pages/p_loading.dart';
-import 'package:tfc/generated/locale_keys.g.dart';
+import 'package:tfc/base/presentation/pages/p_loading_stateless.dart';
 
-class HomePage extends LoadingPage<HomeProvider> {
+class HomePage extends PageLoadingStateless<HomeProvider> {
   HomePage({Key? key}) : super(key: key);
 
   @override
@@ -27,4 +25,7 @@ class HomePage extends LoadingPage<HomeProvider> {
       ),
     );
   }
+
+  @override
+  void initialization(BuildContext context) {}
 }

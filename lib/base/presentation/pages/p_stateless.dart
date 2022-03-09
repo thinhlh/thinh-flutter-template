@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:tfc/base/presentation/pages/page_actions.dart';
 import 'package:provider/provider.dart';
 import 'package:tfc/base/presentation/providers/dialog_provider.dart';
 
-abstract class PageProvider<T extends DialogProvider> extends StatelessWidget {
-  PageProvider({Key? key}) : super(key: key);
+abstract class PageStateless<T extends DialogProvider> extends StatelessWidget
+    implements PageActions {
+  PageStateless({Key? key}) : super(key: key);
 
   late final T provider;
 
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<T>(context, listen: false);
+    initialization(context);
 
     return Scaffold(
-      body: buildPage(context),
+      body: SafeArea(
+        child: buildPage(context),
+      ),
     );
   }
-
-  Widget buildPage(BuildContext context);
 }
