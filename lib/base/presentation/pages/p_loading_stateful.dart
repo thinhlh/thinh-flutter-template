@@ -8,8 +8,8 @@ abstract class PageLoadingStateful<T extends LoadingProvider>
   PageLoadingStateful({Key? key}) : super(key: key);
 }
 
-abstract class PageLoadingState<T extends LoadingProvider>
-    extends PageState<T> {
+abstract class PageLoadingState<T extends LoadingProvider,
+    P extends PageStateful> extends PageState<T, P> {
   @override
   Widget build(BuildContext context) {
     final parent = super.build(context);

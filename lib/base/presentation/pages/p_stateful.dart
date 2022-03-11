@@ -7,9 +7,8 @@ abstract class PageStateful<T extends DialogProvider> extends StatefulWidget {
   const PageStateful({Key? key}) : super(key: key);
 }
 
-abstract class PageState<T extends DialogProvider> extends State<PageStateful>
-    with TickerProviderStateMixin
-    implements PageActions {
+abstract class PageState<T extends DialogProvider, P extends PageStateful>
+    extends State<P> implements PageActions {
   late final T provider;
 
   @override

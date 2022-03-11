@@ -5,6 +5,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:tfc/config/dimens.dart';
 import 'package:tfc/config/languages.dart';
 import 'package:tfc/config/routes.dart';
+import 'package:tfc/config/themes.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -26,6 +27,9 @@ class App extends StatelessWidget {
               supportedLocales: context.supportedLocales,
               initialRoute: Routes.initial,
               onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
+              themeMode: ThemeMode.system,
+              theme: AppTheme.light,
+              darkTheme: AppTheme.dark,
               builder: (ctx, child) => ResponsiveWrapper.builder(
                 child,
                 defaultScale: true,
