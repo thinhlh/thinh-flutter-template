@@ -28,7 +28,7 @@ class WidgetLoadingBuilder<T extends LoadingProvider> extends StatelessWidget {
                 SchedulerBinding.instance?.addPostFrameCallback((_) => isLoading
                     ? AppLoading.showLoading(context)
                     : AppLoading.dismissLoading(context));
-                return Container();
+                return const SizedBox.shrink();
               },
             )
           ],
