@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tfc/base/presentation/pages/page_actions.dart';
-import 'package:tfc/base/presentation/providers/dialog_provider.dart';
-import 'package:provider/provider.dart';
 
-abstract class PageStateful<T extends DialogProvider, P extends StatefulWidget>
+abstract class PageStateful<T extends Bloc, P extends StatefulWidget>
     extends State<P> implements PageActions {
-  late final T provider;
+  late final T bloc;
 
   @override
   void initState() {
     super.initState();
-    provider = Provider.of(context, listen: false);
+    bloc = BlocProvider.of(context, listen: false);
 
     initialization(context);
   }

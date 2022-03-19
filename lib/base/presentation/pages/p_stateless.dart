@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tfc/base/presentation/pages/page_actions.dart';
-import 'package:provider/provider.dart';
-import 'package:tfc/base/presentation/providers/dialog_provider.dart';
 
-abstract class PageStateless<T extends DialogProvider> extends StatelessWidget
+abstract class PageStateless<T extends Bloc> extends StatelessWidget
     implements PageActions {
   PageStateless({Key? key}) : super(key: key);
 
-  late final T provider;
+  late final T bloc;
 
   @override
   Widget build(BuildContext context) {
-    provider = Provider.of<T>(context, listen: false);
+    bloc = BlocProvider.of<T>(context, listen: false);
     initialization(context);
 
     return Scaffold(
