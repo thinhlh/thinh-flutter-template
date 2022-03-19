@@ -4,8 +4,10 @@ import 'package:tfc/base/presentation/pages/page_actions.dart';
 
 abstract class PageStateful<T extends Bloc, P extends StatefulWidget>
     extends State<P> implements PageActions {
+  late final NavigatorState navigator;
   late final T bloc;
 
+  @mustCallSuper
   @override
   void initState() {
     super.initState();
@@ -14,6 +16,7 @@ abstract class PageStateful<T extends Bloc, P extends StatefulWidget>
     initialization(context);
   }
 
+  @mustCallSuper
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,5 +24,11 @@ abstract class PageStateful<T extends Bloc, P extends StatefulWidget>
         child: buildPage(context),
       ),
     );
+  }
+
+  @mustCallSuper
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
