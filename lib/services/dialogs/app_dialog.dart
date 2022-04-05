@@ -1,23 +1,46 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tfc/app/common/presentation/widgets/dialog/w_error_dialog.dart';
 
 class AppDialog {
-  static BuildContext? _context;
-  AppDialog._internal();
+  BuildContext? _context;
 
   /// Show the dialog and store it's context for further dismiss
-  static Future<T?> showAppDialog<T>(BuildContext context, AlertDialog dialog) {
-    _context = context;
-    return showDialog<T>(context: context, builder: (_) => dialog);
+  static Future show(
+    BuildContext context,
+    WErrorDialog dialog,
+  ) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return context.read<AppDialog>().showAppDialog(context, dialog);
   }
 
-  static void dismissAppDialog<T>(BuildContext context, {T? result}) async {
-    if (_context == null) {
-      // Do nothing
-    } else {
-      if (Navigator.canPop(context)) {
-        Navigator.pop(context, result);
+  static void dismiss(BuildContext context) async {
+    context.read<AppDialog>().dismissAppDialog();
+  }
+
+  Future showAppDialog(BuildContext context, Widget dialog) {
+    dismissAppDialog();
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (dialogContext) {
+        _context = dialogContext;
+        return dialog;
+      },
+    );
+  }
+
+  void dismissAppDialog() {
+    if (_context != null) {
+      try {
+        if (Navigator.canPop(_context!)) {
+          Navigator.pop(_context!);
+        }
+      } catch (e) {
+        // Unhandled Exception: Looking up a deactivated widget's ancestor is unsafe.
+      } finally {
         _context = null;
       }
     }

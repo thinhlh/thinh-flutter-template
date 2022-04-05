@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tfc/app/common/presentation/widgets/dialog/w_error_dialog.dart';
 import 'package:tfc/services/dialogs/app_dialog.dart';
 
 abstract class DialogProvider with ChangeNotifier {
-  Future<T?> showDialog<T>(BuildContext context, AlertDialog dialog) {
-    return AppDialog.showAppDialog<T>(context, dialog);
+  Future showDialog(BuildContext context, WErrorDialog dialog) {
+    return AppDialog.show(context, dialog);
   }
 
-  void dismissDialog<T>(BuildContext context, {T? result}) {
-    return AppDialog.dismissAppDialog(context, result: result);
+  void dismissDialog(BuildContext context) {
+    return AppDialog.dismiss(context);
   }
 }

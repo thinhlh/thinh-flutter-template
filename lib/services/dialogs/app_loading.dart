@@ -1,32 +1,35 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tfc/base/presentation/widgets/w_loading.dart';
+import 'package:tfc/services/dialogs/app_dialog.dart';
 
-class AppLoading {
-  static BuildContext? _context;
-  AppLoading._internal();
+class AppLoading extends AppDialog {
+  // Show loading dialog shortcut
+  /// Change icon at https://pub.dev/packages/flutter_spinkit
+  static void show(BuildContext context) {
+    context.read<AppLoading>().showLoading(context);
+  }
 
-  /// Show the dialog and store it's context for further dismiss
-  static Future showLoading(BuildContext context) {
-    _context = context;
-    return showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (_) => const LoadingWidget(
+  /// Hide loading dialog shortcut
+  static void dismiss(BuildContext context) {
+    context.read<AppLoading>().dismissAppDialog();
+  }
+
+  /// Show loading dialog
+  /// Change icon at https://pub.dev/packages/flutter_spinkit
+  Future<void> showLoading(BuildContext context) async {
+    return showAppDialog(
+      context,
+      const WLoading(
         color: Colors.white,
       ),
     );
   }
 
-  static void dismissLoading(BuildContext context) async {
-    if (_context == null) {
-      // Do nothing
-    } else {
-      if (Navigator.canPop(context)) {
-        Navigator.pop(context);
-        _context = null;
-      }
-    }
+  /// Hide loading dialog
+  void dismissLoading() {
+    dismissAppDialog();
   }
 }

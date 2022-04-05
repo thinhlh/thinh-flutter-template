@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-class LoadingWidget extends StatefulWidget {
-  const LoadingWidget({
+class WLoading extends StatefulWidget {
+  const WLoading({
     Key? key,
     this.color,
     this.size = 50.0,
@@ -22,10 +21,10 @@ class LoadingWidget extends StatefulWidget {
   final AnimationController? controller;
 
   @override
-  _LoadingWidgetState createState() => _LoadingWidgetState();
+  _WLoadingState createState() => _WLoadingState();
 }
 
-class _LoadingWidgetState extends State<LoadingWidget>
+class _WLoadingState extends State<WLoading>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
