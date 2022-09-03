@@ -6,37 +6,53 @@ import 'package:tfc/app/common/presentation/widgets/dialog/w_error_dialog.dart';
 
 class AppDialog {
   BuildContext? _context;
+  bool isShowing = false;
 
   /// Show the dialog and store it's context for further dismiss
-  static Future show(
-    BuildContext context,
-    WErrorDialog dialog,
-  ) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return context.read<AppDialog>().showAppDialog(context, dialog);
+  static Future show(BuildContext context, WErrorDialog dialog,
+      {bool dismissible = false}) async {
+    // await Future.delayed(const Duration(milliseconds: 500));
+    return context
+        .read<AppDialog>()
+        .showAppDialog(context, dialog, dismissble: dismissible);
   }
 
   static void dismiss(BuildContext context) async {
     context.read<AppDialog>().dismissAppDialog();
   }
 
-  Future showAppDialog(BuildContext context, Widget dialog) {
+  Future showAppDialog(BuildContext context, Widget dialog,
+      {bool dismissble = false}) {
     dismissAppDialog();
+    // print('Show');
+    isShowing = true;
     return showDialog(
       context: context,
-      barrierDismissible: true,
+      barrierDismissible: dismissble,
       builder: (dialogContext) {
-        _context = dialogContext;
+        // print('Build');
+        if (!isShowing) {
+          // print('Pop After Build');
+          dismissAppDialog();
+        } else {
+          _context = dialogContext;
+        }
         return dialog;
       },
-    );
+    ).then((value) {
+      _context = null;
+      isShowing = false;
+    });
   }
 
   void dismissAppDialog() {
+    isShowing = false;
+    // print('Dismiss');
     if (_context != null) {
+      // print('Pop');
       try {
         if (Navigator.canPop(_context!)) {
-          Navigator.pop(_context!);
+          Navigator.of(_context!).pop(true);
         }
       } catch (e) {
         // Unhandled Exception: Looking up a deactivated widget's ancestor is unsafe.
