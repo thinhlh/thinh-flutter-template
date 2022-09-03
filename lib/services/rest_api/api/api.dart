@@ -68,7 +68,7 @@ mixin Api {
   }
 
   BaseResponse<T> parseApiError<T>(Exception exception) {
-    String message = tr(LocaleKeys.unknown_error);
+    String message = "";
     if (exception is DioError) {
       switch (exception.type) {
         case DioErrorType.connectTimeout:

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tfc/services/services/dialogs/app_dialog.dart';
-import 'package:tfc/services/services/dialogs/widgets/w_app_loading.dart';
+import 'package:tfc/services/dialogs/app_dialog.dart';
+import 'package:tfc/services/dialogs/widgets/w_app_loading.dart';
 
 class AppLoading extends AppDialog {
   // Show loading dialog shortcut

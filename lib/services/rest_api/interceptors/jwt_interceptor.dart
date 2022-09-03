@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:tfc/services/services/local/shared_preferences/app_preference.dart';
-import 'package:tfc/services/services/local/shared_preferences/app_preference_keys.dart';
+import 'package:tfc/services/local/shared_preferences/app_preference.dart';
+import 'package:tfc/services/local/shared_preferences/app_preference_keys.dart';
 import 'package:tfc/utils/logger_utils.dart';
 
 class JWTInterceptor extends Interceptor {

@@ -48,7 +48,7 @@ class Env {
       dateFormat: 'HH:mm, MMM dd yyyy',
       clientID: '',
       domain: 'https://api.saleboltapp.com',
-      baseUrl: 'http://localhost:8080',
+      baseUrl: 'https://mocki.io/v1/84e184af-c3a4-4834-8de4-14c0a8d8b32f',
       playStoreID: "playStoreID",
       appStoreID: "appStoreID",
       statementSyncTime: "2021-01-01",

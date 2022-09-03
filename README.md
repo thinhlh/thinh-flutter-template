@@ -102,7 +102,7 @@ AppConfig.initialize(env: Env.dev());
 2. Generate keys using this command
 
 ```
-flutter pub run easy_localization -S assets/translations -o locale_keys.g.dart -f keys
+flutter pub run easy_localization:generate -S assets/translations -o locale_keys.g.dart -f keys 
 ```
 
 3. Transform from keys to string resource
@@ -124,7 +124,7 @@ The application RestAPI service depends on the return Base model defined. You ca
 ## Application Dependencies
 
 ```
-Flutter 2.10.1 • channel stable • https://github.com/flutter/flutter.git
+Flutter 3.3.0 • channel stable • https://github.com/flutter/flutter.git
 Framework • revision db747aa133 (3 weeks ago) • 2022-02-09 13:57:35 -0600
 Engine • revision ab46186b24
 Tools • Dart 2.16.1 • DevTools 2.9.2
