@@ -1,6 +1,19 @@
 {
-    "general":"Thinh Flutter Clean",
+    "general":"Thinh Flutter Template",
     "common":{
-        "default_error":"Unknown Error"
+        "default_error":"Unknown Error",
+        "dialog":{
+            "success_title":"Success!",
+            "error_title":"Oh Snap!",
+            "info_title":"Info!",
+            "success_action":"Continue",
+            "error_action":"Try Again",
+            "info_action":"Okay"
+        }
+    },
+    "home":{
+        "call_api_success":"Call API Success",
+        "call_api_error":"Call API Error",
+        "change_locale":"Change Locale"
     }
 }

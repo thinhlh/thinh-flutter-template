@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppDimens {
-  AppDimens._internal();
+class AppSizes {
+  AppSizes._internal();
 
   // Iphone 12 Pro Max
   static const Size designSize = Size(428, 926);

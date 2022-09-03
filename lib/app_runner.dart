@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tfc/config/app_config.dart';
 import 'package:tfc/config/app_languages.dart';
 import 'package:tfc/config/env/env.dart';
@@ -17,7 +16,6 @@ class AppRunner {
 
   Future<void> runApplication() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await Future.delayed(const Duration(seconds: 3));
     await Future.wait([
       _initializeDependencies(),
       _initServices(),

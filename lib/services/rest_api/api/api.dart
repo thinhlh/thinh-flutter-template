@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:dio/adapter.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:tfc/config/app_config.dart';
+import 'package:tfc/generated/locale_keys.g.dart';
 import 'package:tfc/services/rest_api/api/api_error_type.dart';
 import 'package:tfc/services/rest_api/interceptors/dio_logger_interceptor.dart';
 import 'package:tfc/services/rest_api/interceptors/jwt_interceptor.dart';
@@ -68,26 +69,36 @@ mixin Api {
   }
 
   BaseResponse<T> parseApiError<T>(Exception exception) {
-    String message = "";
-    if (exception is DioError) {
-      switch (exception.type) {
-        case DioErrorType.connectTimeout:
-          break;
-        case DioErrorType.sendTimeout:
-          break;
-        case DioErrorType.receiveTimeout:
-          break;
-        case DioErrorType.cancel:
-          break;
-        case DioErrorType.other:
-          break;
-        case DioErrorType.response:
-          message = _handlingErrorOnStatusCode(exception) ??
-              exception.response?.data?.message;
-          break;
+    String message = tr(LocaleKeys.common_default_error);
+
+    try {
+      if (exception is DioError) {
+        switch (exception.type) {
+          case DioErrorType.connectTimeout:
+            break;
+          case DioErrorType.sendTimeout:
+            break;
+          case DioErrorType.receiveTimeout:
+            break;
+          case DioErrorType.cancel:
+            break;
+          case DioErrorType.other:
+            break;
+          case DioErrorType.response:
+            final payload = exception.response?.data;
+
+            if (payload == null) {
+              message = _handlingErrorOnStatusCode(exception) ?? message;
+            } else {
+              message = exception.response?.data?.message ??
+                  (_handlingErrorOnStatusCode(exception) ?? message);
+            }
+        }
+      } else {
+        message = exception.toString();
       }
-    } else {
-      message = exception.toString();
+    } catch (e) {
+      // Further handling if needed?
     }
 
     return BaseResponse.error(message);
@@ -100,6 +111,7 @@ mixin Api {
     } else {
       //
     }
+
     return message;
   }
 }

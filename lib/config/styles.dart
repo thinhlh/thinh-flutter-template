@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tfc/config/colors.dart';
-import 'package:tfc/config/dimens.dart';
+import 'package:tfc/config/app_sizes.dart';
 
 class AppStyles {
   AppStyles._internal();
@@ -8,19 +8,19 @@ class AppStyles {
   /// TODO define all widgets style of the application here
 
   static final TextStyle titleLarge = TextStyle(
-    fontSize: AppDimens.largeText,
+    fontSize: AppSizes.largeText,
     color: AppColors.neutral.shade900,
     fontWeight: AppStyles.bold,
   );
 
   static final TextStyle titleMedium = TextStyle(
-    fontSize: AppDimens.mediumText,
+    fontSize: AppSizes.mediumText,
     color: AppColors.neutral.shade900,
     fontWeight: AppStyles.bold,
   );
 
   static final TextStyle titleSmall = TextStyle(
-    fontSize: AppDimens.mediumText,
+    fontSize: AppSizes.mediumText,
     color: AppColors.neutral.shade900,
     fontWeight: AppStyles.bold,
   );
@@ -31,7 +31,7 @@ class AppStyles {
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
-          AppDimens.buttonBorderRadius,
+          AppSizes.buttonBorderRadius,
         ),
       ),
     ),

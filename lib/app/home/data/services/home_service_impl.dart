@@ -9,4 +9,11 @@ class HomeServiceImpl with Api implements HomeService {
 
     return result;
   }
+
+  @override
+  Future<BaseResponse<String>> checkConnectionFailed() async {
+    final result = await get<String>("/failed");
+
+    return result;
+  }
 }

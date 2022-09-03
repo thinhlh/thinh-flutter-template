@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tfc/app/common/presentation/widgets/dialog/dialog_type.dart';
 import 'package:tfc/config/colors.dart';
-import 'package:tfc/config/dimens.dart';
+import 'package:tfc/config/app_sizes.dart';
 import 'package:tfc/config/styles.dart';
 import 'package:tfc/utils/extensions/context_extension.dart';
 
@@ -30,7 +30,7 @@ class WErrorDialog extends Dialog {
                 ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      AppDimens.extraLargeRadius,
+                      AppSizes.extraLargeRadius,
                     ),
                   ),
                   child: CustomPaint(
@@ -47,7 +47,7 @@ class WErrorDialog extends Dialog {
                 Builder(
                   builder: (context) => Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: AppDimens.mediumWidthDimens,
+                      horizontal: AppSizes.mediumWidthDimens,
                     ),
                     child: Center(
                       child: Column(
@@ -62,14 +62,14 @@ class WErrorDialog extends Dialog {
                               color: AppColors.primaryDark,
                             ),
                           ),
-                          SizedBox(height: AppDimens.largeHeightDimens),
+                          SizedBox(height: AppSizes.largeHeightDimens),
                           Text(
                             content,
                             textAlign: TextAlign.center,
                             style: context.textTheme.titleMedium,
                           ),
-                          SizedBox(height: AppDimens.largeHeightDimens),
-                          SizedBox(height: AppDimens.largeHeightDimens),
+                          SizedBox(height: AppSizes.largeHeightDimens),
+                          SizedBox(height: AppSizes.largeHeightDimens),
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).pop();
@@ -96,7 +96,7 @@ class WErrorDialog extends Dialog {
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-              AppDimens.extraLargeRadius,
+              AppSizes.extraLargeRadius,
             ),
           ),
         );

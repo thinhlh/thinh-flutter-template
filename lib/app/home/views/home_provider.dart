@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:tfc/app/home/domain/services/home_service.dart';
 import 'package:tfc/base/presentation/providers/loading_provider.dart';
 import 'package:tfc/generated/locale_keys.g.dart';
@@ -15,6 +14,20 @@ class HomeProvider extends LoadingProvider {
     final response = await _homeService.checkConnection();
 
     title = response.data ?? "";
+    notifyListeners();
+
+    return response;
+  }
+
+  Future<BaseResponse<String>> checkConnectionFailed() async {
+    final response = await _homeService.checkConnectionFailed();
+
+    if (response.success) {
+      title = response.data ?? "";
+    } else {
+      title = response.message ?? "";
+    }
+
     notifyListeners();
 
     return response;
