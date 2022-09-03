@@ -25,7 +25,7 @@ class WidgetLoadingBuilder<T extends LoadingProvider> extends StatelessWidget {
             Selector<T, bool>(
               selector: (_, provider) => provider.isLoading,
               builder: (_, isLoading, child) {
-                SchedulerBinding.instance?.addPostFrameCallback(
+                SchedulerBinding.instance.addPostFrameCallback(
                   (_) => isLoading
                       ? AppLoading.show(context)
                       : AppLoading.dismiss(context),

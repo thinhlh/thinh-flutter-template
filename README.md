@@ -1,6 +1,6 @@
-# Thinh Flutter Clean Architecture Template
+# Thinh Flutter Template 2.0
 
-> This Flutter template is written to cater on developers who are familiar with Clean Architecture as well as Test Driven Development process.
+> This Flutter template is written to reduce the development process, effort and initial time. This template also provides a rich external features, clean and readable structure.
 
 ## Documentation
 
@@ -13,8 +13,9 @@
 
 ## Installation
 
-1. Clone the project
-2. Change all the package name appeared in the project
+1. Clone the project (consider using template).
+2. Change all the package name appeared in the project.
+3. Update app's resources.
 
 ## Folder Structure
 
@@ -27,77 +28,103 @@ This folder contains all the features in the application. Each child folder of t
 This directory contains all the base classes with essential functionality that could be implemented during developing process.
 
 **3. Config**
-This folder acts as a resource of the project, containning routes configuration, colors, dimensions, styles and constants...
+This folder acts as a resource of the project, containing:
+1. Routing
+2. Colors
+3. Sizes
+4. Themes
+5. Languages
+6. Environments
+7. Constants
+8. Etc..
 
-**4. Core**
-
-The core folder contains all the environment variables as well as platform-specific and errors configurations.
-
-**5. Generated**
+**4. Generated**
 
 > **WARNING!!!** Do NOT modify this folder as it will be automatically generated during running the application.
 
 **6. Services**
 
-Contains all the service of the application, this including dialog services, localstore services, rest services...
+Contains all the service of the application including but not limited to:
+1. Dialog service
+2. Shared preference
+3. REST API service
 
 **7. Utils**
 
-Contains all the helper that can be shared and resuable in others projects. This also including the [dependency initializer file](./lib/utils/dependency_initializer.dart) where we inject dependency through out the application.
+Contains all the helpers classes that can be shared and resuable in others projects.
+
+**8. App Runner**
+The [app_runner.dart](./lib/app_runner.dart) is the root of the application. It contains blocks to instantiate the app with it's dependencies.
 
 ## How to use
 
 ### Prequesties
 
-This template follow the **Test Driven Development** process and **Clean Architecture**. Hence it is essential to have fundamental knowledge about 2 above concepts.
+This template follow the **Test Driven Development** process and **MVP architecture**. Hence it is essential to have fundamental knowledge about 2 above concepts.
 
 ### Implementing features
 
 > All the feature of the application are placed in **app** folder. Each feature is spliited into 3 different folder named domain, data, presentation with different usages.
 
-1.  Domain
-    Containing 3 child directories named **entities, usecases,repositories:**
+1.  Domain - *where business layer placed*
+    Containing 2 child directories named **entities and services:**
 
         - Entities: The core entity of the feature, used to display to view.
-        - Usecases: Functionalities of the feature.
-        - Repository: A contract to communicate between domain and data.
+        - Services: A contract to communicate between domain layer and data layer.
 
-2.  Data
-    Containing 3 child directories named **repositories, models, datasources:**
+2.  Data - *datasources of the feature*
+    Containing 2 child directories named **services, models and dto (optional):**
 
-        - Repositories: The implementation of repository specified in the domain folder.
+        - Services: The implementation of service specified in the domain folder.
         - Models: A model that is returned from application's boundary such as from API, local storage
-        - Datasource: The sources where the application start communicating with other interfaces.
 
-3.  Presentation
+3.  Presentation - *views of the features*
     Containing 3 child directories named **pages, business-logic-handler, widgets:**
 
         - pages: Contains pages of the features
         - business-logic-handler: This is the component communicates with domain layer and depends on the state managment, whether it could be a bloc, provider, controller, etc...
-        - widgets (optional):  contains widgets used in pages
+        - widgets (optional):  contains widgets used accross pages
 
-4.  Injection Container
+<!-- 4.  Injection Container
 
-    This file is usally placed at the root of the feature folder and instantiate at the [dependency_initializer file](./lib/utils/dependency_initializer.dart). Etc: [home_injection_container.dart](./lib/app/home/home_injection_container.dart)
+    This file is usally placed at the root of the feature folder and instantiate at the [dependency_initializer file](./lib/utils/dependency_initializer.dart). Etc: [home_injection_container.dart](./lib/app/home/home_injection_container.dart) -->
 
+### Dealing with API / Data handler
+> Usually, while using Provider, we often faces with the situation when need to navigating before/after an api is executed (etc: show loading, show dialog...). By default, provider package only support UI reload when state changes, NOT navigating when a new state is exposed (similar to BlocListener). Hence using `apiCallSafety` will avoid this issue.
+
+1. Wrap the api calling function from UI with `apiCallSafety` method (inside [ApiError](./lib/services/rest_api/api/api_error.dart) mixin)
+2. Handling call flow by submitting the implementation to these callbacks:
+    1. `Future<void> Function()? onStart`
+        Called before executing API.
+
+    2. `Future<void> Function()? onCompleted`
+        Called right after executing API completed.
+    3. `Future<void> Function(T? res)? onSuccess`
+        Called after `onCompleted` if success.
+    4. `Future<void> Function(dynamic error)? onError` Called after `onCompleted` if error.
+    
+    5. `Future<void> Function()? onFinally` Called finally where success of failed.
+    
+    6. `Future<bool> Function()? unauthorized` Called when API return with 401 - Unauthorized. Return `true` if want to forward to *app auth failed hander*, `false` will ignore.
+3. Implementing API error handler by status if needed.
 ## Application configuration
 
 > Depends on the application specification, you will need to modify several values and configuration in order to match the requirements.
 
 ### Modify the environment variables
 
-- Depends on the DEV and PRODUCTION stages, you will need to update the [env](./lib/core/env/env.dart)
-- To switch between stages, go to the [app_runner.dart](./lib/utils/app_runner.dart) and update this line.
+- Depends on the DEV and PRODUCTION stages, you will need to update the [env](./lib/config/env/env.dart)
+- To switch between stages, go to the [app_runner.dart](./lib/app_runner.dart) and update this line.
 
 ```
-AppConfig.initialize(env: Env.dev());
+AppConfig(env: Env.dev());
 ```
 
-- To add more environment, just add it to env folder follow the structure.
+- To add more environment, just add it to env folder follow the structure and update [env_type.dart](./lib/config/env/env_type.dart).
 
 ### Configurate localization
 
-1. To add more localization (languages, resources), go to translation folder and add new `[language-code].json` file or modify the existed resouces. etc: [en.json](./assets/translations/en.json)
+1. To add more localization (languages, resources), go to translation folder and add new `language-code.json` file or modify the existed resouces. etc: [en.json](./assets/translations/en.json)
 
 2. Generate keys using this command
 
@@ -119,27 +146,27 @@ To add named route to the application, modify the `rooutes.dart` file inside the
 
 ### Base API response model.
 
-The application RestAPI service depends on the return Base model defined. You can override this model by modifying [response_model.dart](./lib/base/models/response_model.dart). Also server error will also be parsed to [model](./lib/services/rest_api/models/base_error.dart).
+The application RestAPI service depends on the return Base model defined. You can override this model by modifying [base_response.dart](./lib/services/rest_api/models/base_response.dart). Also server error will also be parsed to [model](./lib/services/rest_api/models/base_error.dart).
 
 ## Application Dependencies
 
 ```
 Flutter 3.3.0 • channel stable • https://github.com/flutter/flutter.git
-Framework • revision db747aa133 (3 weeks ago) • 2022-02-09 13:57:35 -0600
-Engine • revision ab46186b24
-Tools • Dart 2.16.1 • DevTools 2.9.2
+Framework • revision ffccd96b62 (5 days ago) • 2022-08-29 17:28:57 -0700
+Engine • revision 5e9e0e0aa8
+Tools • Dart 2.18.0 • DevTools 2.15.0
 ```
 
 ```
-flutter_screenutil: ^5.2.0
-responsive_framework: ^0.1.7
+flutter_screenutil: ^5.5.4
+responsive_framework: ^0.2.0
 easy_localization: ^3.0.0
-dio: ^4.0.4
+dio: ^4.0.6
 provider: ^6.0.2
-dartz: ^0.10.1
-equatable: ^2.0.3
 get_it: ^7.2.0
 intl: ^0.17.0
+google_fonts: ^3.0.1
+shared_preferences: ^2.0.15
 logger: ^1.1.0
 ```
 

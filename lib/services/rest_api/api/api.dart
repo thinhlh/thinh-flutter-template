@@ -90,8 +90,8 @@ mixin Api {
             if (payload == null) {
               message = _handlingErrorOnStatusCode(exception) ?? message;
             } else {
-              message = exception.response?.data?.message ??
-                  (_handlingErrorOnStatusCode(exception) ?? message);
+              message = _handlingErrorOnStatusCode(exception) ??
+                  (exception.response?.data?.message ?? message);
             }
         }
       } else {
