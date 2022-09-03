@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tfc/base/presentation/widgets/w_loading.dart';
 import 'package:tfc/services/dialogs/app_dialog.dart';
+import 'package:tfc/services/dialogs/widgets/w_app_loading.dart';
 
 class AppLoading extends AppDialog {
   // Show loading dialog shortcut
@@ -14,15 +14,15 @@ class AppLoading extends AppDialog {
 
   /// Hide loading dialog shortcut
   static void dismiss(BuildContext context) {
-    context.read<AppLoading>().dismissAppDialog();
+    context.read<AppLoading>().dismissLoading();
   }
 
   /// Show loading dialog
   /// Change icon at https://pub.dev/packages/flutter_spinkit
-  Future<void> showLoading(BuildContext context) async {
+  Future<void> showLoading(BuildContext context) {
     return showAppDialog(
       context,
-      const WLoading(
+      const WAppLoading(
         color: Colors.white,
       ),
     );
@@ -30,6 +30,6 @@ class AppLoading extends AppDialog {
 
   /// Hide loading dialog
   void dismissLoading() {
-    dismissAppDialog();
+    return dismissAppDialog();
   }
 }

@@ -1,6 +1,19 @@
 {
-    "general":"Thinh Flutter Clean",
+    "general":"Thinh Flutter Template VN",
     "common":{
-        "default_error":"Lỗi không xác định"
+        "default_error":"Lỗi không xác định",
+        "dialog":{
+            "success_title":"Thành công!",
+            "error_title":"Ôi không!",
+            "info_title":"Thông tin!",
+            "success_action":"Tiếp tục",
+            "error_action":"Thử Lại",
+            "info_action":"Okay"
+        }
+    },
+    "home":{
+        "call_api_success":"Gọi API Thành Công",
+        "call_api_error":"Gọi API Không Thành Công",
+        "change_locale":"Đổi Locale"
     }
 }
