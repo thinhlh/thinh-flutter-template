@@ -23,7 +23,7 @@ class App extends StatelessWidget {
         fallbackLocale: AppLanguages.fallbackLocale,
         child: ScreenUtilInit(
           designSize: AppSizes.designSize,
-          builder: () => Builder(
+          builder: (ctx, child) => Builder(
             builder: (context) => MaterialApp(
               debugShowCheckedModeBanner: false,
               localizationsDelegates: context.localizationDelegates,
