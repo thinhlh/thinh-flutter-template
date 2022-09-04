@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tfc/config/app_routes.dart';
+import 'package:go_router/go_router.dart';
 
 extension ContextExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
@@ -15,8 +15,7 @@ extension ContextExtension on BuildContext {
 
   T? getArguments<T>() => ModalRoute.of(this)?.settings.arguments as T?;
 
-  NavigatorState? get navigator {
-    print(AppRoutes.instance.navigatorKey.currentState);
-    return AppRoutes.instance.navigatorKey.currentState;
+  GoRouter? get navigator {
+    return GoRouter.of(this);
   }
 }

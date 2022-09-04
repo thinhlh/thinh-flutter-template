@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:tfc/config/app_languages.dart';
+import 'package:tfc/config/app_routers_v2.dart';
 import 'package:tfc/config/app_sizes.dart';
 import 'package:tfc/config/global_providers.dart';
 import 'package:tfc/config/app_routes.dart';
@@ -43,13 +44,18 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         fallbackLocale: AppLanguages.fallbackLocale,
         child: ScreenUtilInit(
           designSize: AppSizes.designSize,
-          builder: (ctx, child) => MaterialApp(
+          builder: (ctx, child) => MaterialApp.router(
             debugShowCheckedModeBanner: false,
             localizationsDelegates: ctx.localizationDelegates,
             locale: ctx.locale,
             supportedLocales: ctx.supportedLocales,
-            initialRoute: AppRoutes.initial,
-            onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
+            routeInformationProvider:
+                AppRoutesV2.instance.router.routeInformationProvider,
+            routeInformationParser:
+                AppRoutesV2.instance.router.routeInformationParser,
+            routerDelegate: AppRoutesV2.instance.router.routerDelegate,
+            // initialRoute: AppRoutes.initial,
+            // onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
             themeMode: ThemeMode.system,
             theme: AppTheme.light,
             darkTheme: AppTheme.dark,

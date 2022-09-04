@@ -13,24 +13,27 @@ class LoginSuccessPage extends PageStateless<LoginSuccessProvider> {
     BuildContext context,
     LoginSuccessProvider provider,
   ) {
-    return SafeArea(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Logged In',
-              style: context.textTheme.titleLarge,
-            ),
-            AppSizes.mediumHeightDimens.verticalSpace,
-            ElevatedButton(
-              onPressed: () => apiCallSafety(
-                () => provider.logout(),
+    return Scaffold(
+      appBar: AppBar(),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Logged In',
+                style: context.textTheme.titleLarge,
               ),
-              child: const Text('Logout'),
-            )
-          ],
+              AppSizes.mediumHeightDimens.verticalSpace,
+              ElevatedButton(
+                onPressed: () => apiCallSafety(
+                  () => provider.logout(),
+                ),
+                child: const Text('Logout'),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -45,7 +45,7 @@ mixin ApiError {
 
           // If not provider unauthorized function or forward is true
           if (unauthorized == null || forwardToAppUnAuthorized == true) {
-            _onAppUnauthorized?.call();
+            //
           }
         }
         await onError?.call(result.message);
