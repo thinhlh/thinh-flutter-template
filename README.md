@@ -114,13 +114,19 @@ This template follow the **Test Driven Development** process and **MVP architect
 ### Modify the environment variables
 
 - Depends on the DEV and PRODUCTION stages, you will need to update the [env](./lib/config/env/env.dart)
-- To switch between stages, go to the [app_runner.dart](./lib/app_runner.dart) and update this line.
+- To switch between stages, create a new environment main file like this [example](./lib/main_dev.dart).
 
 ```
 AppConfig(env: Env.dev());
 ```
 
-- To add more environment, just add it to env folder follow the structure and update [env_type.dart](./lib/config/env/env_type.dart).
+- To add more environment, just add it to env folder follow the structure and update [env_type.dart](./lib/config/env/env_type.dart) with specified a new `main_env.dart` file
+
+### Running application from environment
+To run app in dev environment consider:
+```
+flutter run --release -t lib/main_dev
+```
 
 ### Configurate localization
 
