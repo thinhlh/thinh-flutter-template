@@ -105,7 +105,7 @@ This template follow the **Test Driven Development** process and **MVP architect
     
     5. `Future<void> Function()? onFinally` Called finally where success of failed.
     
-    6. `Future<bool> Function()? unauthorized` Called when API return with 401 - Unauthorized. Return `true` if want to forward to *app auth failed hander*, `false` will ignore.
+    6. `Future<bool> Function()? unauthorized` Called when API return with 401 - Unauthorized. Return `true` if want to forward to *app auth failed handler*, `false` will ignore.
 3. Implementing API error handler by status if needed.
 ## Application configuration
 

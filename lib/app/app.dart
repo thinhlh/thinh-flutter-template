@@ -23,14 +23,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     super.initState();
 
     WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      ApiError.init(onAppUnauthorized: () {
-        AppRoutes.instance.navigatorKey.currentState?.pushNamedAndRemoveUntil(
-          AppRoutes.home,
-          (route) => false,
-        );
-      });
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) async {});
   }
 
   @override

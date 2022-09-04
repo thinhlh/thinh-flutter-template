@@ -7,7 +7,9 @@ import 'package:tfc/services/rest_api/api/api_error.dart';
 abstract class PageStateless<T extends ChangeNotifier> extends StatelessWidget
     with ApiError
     implements PageActions<T> {
-  const PageStateless({Key? key}) : super(key: key);
+  const PageStateless({
+    Key? key,
+  }) : super(key: key);
 
   @override
   @mustCallSuper

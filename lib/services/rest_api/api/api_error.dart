@@ -1,18 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:tfc/services/rest_api/api/api_error_type.dart';
 import 'package:tfc/services/rest_api/models/base_response.dart';
 
 mixin ApiError {
-  static VoidCallback? _onAppUnauthorized;
-
-  static void init({
-    required VoidCallback onAppUnauthorized,
-  }) {
-    _onAppUnauthorized = onAppUnauthorized;
-  }
-
   /// Call api safety with error handling.
   /// Required:
   /// - apiCaller: call service functions
