@@ -15,7 +15,7 @@ extension ContextExtension on BuildContext {
 
   T? getArguments<T>() => ModalRoute.of(this)?.settings.arguments as T?;
 
-  GoRouter? get navigator {
+  GoRouter get navigator {
     return GoRouter.of(this);
   }
 }

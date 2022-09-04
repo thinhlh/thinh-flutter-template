@@ -10,9 +10,9 @@ import 'package:tfc/app/login_success/view/pages/login_success_page.dart';
 import 'package:tfc/app/login_success/view/providers/login_success_provider.dart';
 import 'package:tfc/utils/routes_utils.dart';
 
-class AppRoutesV2 {
-  static final AppRoutesV2 instance = AppRoutesV2._internal();
-  AppRoutesV2._internal();
+class AppRoutes {
+  static final AppRoutes instance = AppRoutes._internal();
+  AppRoutes._internal();
 
   String get initial => home;
 

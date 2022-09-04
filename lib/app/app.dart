@@ -4,12 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:tfc/config/app_languages.dart';
-import 'package:tfc/config/app_routers_v2.dart';
+import 'package:tfc/config/app_routers.dart';
 import 'package:tfc/config/app_sizes.dart';
 import 'package:tfc/config/global_providers.dart';
-import 'package:tfc/config/app_routes.dart';
 import 'package:tfc/config/app_themes.dart';
-import 'package:tfc/services/rest_api/api/api_error.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -50,10 +48,10 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             locale: ctx.locale,
             supportedLocales: ctx.supportedLocales,
             routeInformationProvider:
-                AppRoutesV2.instance.router.routeInformationProvider,
+                AppRoutes.instance.router.routeInformationProvider,
             routeInformationParser:
-                AppRoutesV2.instance.router.routeInformationParser,
-            routerDelegate: AppRoutesV2.instance.router.routerDelegate,
+                AppRoutes.instance.router.routeInformationParser,
+            routerDelegate: AppRoutes.instance.router.routerDelegate,
             // initialRoute: AppRoutes.initial,
             // onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
             themeMode: ThemeMode.system,

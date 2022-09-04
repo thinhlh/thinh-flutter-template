@@ -14,7 +14,6 @@ class LoginSuccessPage extends PageStateless<LoginSuccessProvider> {
     LoginSuccessProvider provider,
   ) {
     return Scaffold(
-      appBar: AppBar(),
       body: SafeArea(
         child: Center(
           child: Column(

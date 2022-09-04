@@ -1,16 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tfc/app/common/presentation/widgets/dialog/dialog_type.dart';
 import 'package:tfc/app/common/presentation/widgets/dialog/w_error_dialog.dart';
 import 'package:tfc/app/home/views/home_provider.dart';
 import 'package:tfc/base/presentation/pages/p_stateless.dart';
 import 'package:tfc/config/app_languages.dart';
-import 'package:tfc/config/app_routers_v2.dart';
 import 'package:tfc/config/app_sizes.dart';
-import 'package:tfc/config/app_routes.dart';
 import 'package:tfc/generated/locale_keys.g.dart';
 import 'package:tfc/utils/extensions/context_extension.dart';
 
@@ -23,7 +20,6 @@ class HomePage extends PageStateless<HomeProvider> {
     HomeProvider provider,
   ) {
     return Scaffold(
-      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -52,8 +48,8 @@ class HomePage extends PageStateless<HomeProvider> {
                         provider.checkConnection,
                         onStart: () async => showLoading(context, true),
                         onCompleted: () async => showLoading(context, false),
-                        onSuccess: (data) async => context.go(
-                          "/home/login-success/home",
+                        onSuccess: (data) async => context.navigator.go(
+                          '/home/login-success/home/login-success',
                         ),
                       ),
                       child: Text(
