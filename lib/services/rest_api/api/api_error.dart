@@ -1,18 +1,28 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:tfc/services/rest_api/api/api_error_type.dart';
 import 'package:tfc/services/rest_api/models/base_response.dart';
 
 mixin ApiError {
+  static VoidCallback? _onAppUnauthorized;
+
+  static void init({
+    required VoidCallback onAppUnauthorized,
+  }) {
+    _onAppUnauthorized = onAppUnauthorized;
+  }
+
   /// Call api safety with error handling.
   /// Required:
-  /// - dioApi: call async dio function
+  /// - apiCaller: call service functions
   /// Optional:
-  /// - onStart: the function executed before api, can be null
-  /// - onSuccess: the function executed on api completed with success, can be null
-  /// - onError: the function executed in case api crashed, can be null
-  /// - onCompleted: the function executed after api completed or before crashing, can be null
+  /// - onStart: the function executed before the handler, can be null
+  /// - onCompleted: the function executed right after handler is executed, can be null
+  /// - onSuccess: the function executed on handler completed with success, can be null
+  /// - onError: the function executed in case handler return failed or crashed, can be null
   /// - onFinally: the function executed end of function, can be null
+  /// - unauthorized: the function executed when apiCaller return with unauthorized error. Return false to by pass the global handler, can be null
   Future<void> apiCallSafety<T>(
     Future<BaseResponse<T>> Function() apiCaller, {
     Future<void> Function()? onStart,
@@ -43,7 +53,7 @@ mixin ApiError {
 
           // If not provider unauthorized function or forward is true
           if (unauthorized == null || forwardToAppUnAuthorized == true) {
-            // MainBloc.unauthorizedCalback?.call();
+            _onAppUnauthorized?.call();
           }
         }
         await onError?.call(result.message);

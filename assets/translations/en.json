@@ -12,8 +12,8 @@
         }
     },
     "home":{
-        "call_api_success":"Call API Success",
-        "call_api_error":"Call API Error",
+        "call_api_success":"Login Success",
+        "call_api_error":"Login Error",
         "change_locale":"Change Locale"
     }
 }

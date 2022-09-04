@@ -1,1 +1,4 @@
-enum ApiErrorCode { unknown, unauthorized }
+enum ApiErrorCode {
+  unknown,
+  unauthorized;
+}

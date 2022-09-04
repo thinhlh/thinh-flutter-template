@@ -12,9 +12,15 @@ class AppTheme {
         backgroundColor: MaterialStateProperty.all(AppColors.primary),
         overlayColor: MaterialStateProperty.all(Colors.transparent),
         elevation: MaterialStateProperty.all(0),
+        padding: MaterialStateProperty.all(
+          EdgeInsets.symmetric(
+            horizontal: AppSizes.largeWidthDimens,
+            vertical: AppSizes.largeHeightDimens,
+          ),
+        ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSizes.smallRadius),
+            borderRadius: BorderRadius.circular(AppSizes.mediumRadius),
           ),
         ),
       ),

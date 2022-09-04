@@ -12,8 +12,8 @@
         }
     },
     "home":{
-        "call_api_success":"Gọi API Thành Công",
-        "call_api_error":"Gọi API Không Thành Công",
+        "call_api_success":"Đăng Nhập Thành Công",
+        "call_api_error":"Đăng Nhập Thất Bại",
         "change_locale":"Đổi Locale"
     }
 }

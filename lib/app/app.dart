@@ -6,11 +6,38 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:tfc/config/app_languages.dart';
 import 'package:tfc/config/app_sizes.dart';
 import 'package:tfc/config/global_providers.dart';
-import 'package:tfc/config/routes.dart';
+import 'package:tfc/config/app_routes.dart';
 import 'package:tfc/config/app_themes.dart';
+import 'package:tfc/services/rest_api/api/api_error.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ApiError.init(onAppUnauthorized: () {
+        AppRoutes.instance.navigatorKey.currentState?.pushNamedAndRemoveUntil(
+          AppRoutes.home,
+          (route) => false,
+        );
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,29 +50,27 @@ class App extends StatelessWidget {
         fallbackLocale: AppLanguages.fallbackLocale,
         child: ScreenUtilInit(
           designSize: AppSizes.designSize,
-          builder: (ctx, child) => Builder(
-            builder: (context) => MaterialApp(
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: context.localizationDelegates,
-              locale: context.locale,
-              supportedLocales: context.supportedLocales,
-              initialRoute: Routes.initial,
-              onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
-              themeMode: ThemeMode.system,
-              theme: AppTheme.light,
-              darkTheme: AppTheme.dark,
-              builder: (ctx, child) => ResponsiveWrapper.builder(
-                child,
-                defaultScale: true,
-                maxWidth: 2460,
-                minWidth: 350,
-                breakpoints: const [
-                  ResponsiveBreakpoint.resize(350, name: MOBILE),
-                  ResponsiveBreakpoint.autoScale(600, name: TABLET),
-                  ResponsiveBreakpoint.resize(800, name: DESKTOP),
-                  ResponsiveBreakpoint.autoScale(1700, name: 'XL'),
-                ],
-              ),
+          builder: (ctx, child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: ctx.localizationDelegates,
+            locale: ctx.locale,
+            supportedLocales: ctx.supportedLocales,
+            initialRoute: AppRoutes.initial,
+            onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
+            themeMode: ThemeMode.system,
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            builder: (_, child) => ResponsiveWrapper.builder(
+              child,
+              defaultScale: true,
+              maxWidth: 2460,
+              minWidth: 350,
+              breakpoints: const [
+                ResponsiveBreakpoint.resize(350, name: MOBILE),
+                ResponsiveBreakpoint.autoScale(600, name: TABLET),
+                ResponsiveBreakpoint.resize(800, name: DESKTOP),
+                ResponsiveBreakpoint.autoScale(1700, name: 'XL'),
+              ],
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tfc/config/app_routes.dart';
 
 extension ContextExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
@@ -13,4 +14,9 @@ extension ContextExtension on BuildContext {
       MediaQuery.of(this).platformBrightness == Brightness.dark;
 
   T? getArguments<T>() => ModalRoute.of(this)?.settings.arguments as T?;
+
+  NavigatorState? get navigator {
+    print(AppRoutes.instance.navigatorKey.currentState);
+    return AppRoutes.instance.navigatorKey.currentState;
+  }
 }

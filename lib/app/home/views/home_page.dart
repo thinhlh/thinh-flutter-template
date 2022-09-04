@@ -8,6 +8,7 @@ import 'package:tfc/app/home/views/home_provider.dart';
 import 'package:tfc/base/presentation/pages/p_stateless.dart';
 import 'package:tfc/config/app_languages.dart';
 import 'package:tfc/config/app_sizes.dart';
+import 'package:tfc/config/app_routes.dart';
 import 'package:tfc/generated/locale_keys.g.dart';
 import 'package:tfc/utils/extensions/context_extension.dart';
 
@@ -20,61 +21,78 @@ class HomePage extends PageStateless<HomeProvider> {
     HomeProvider provider,
   ) {
     return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Selector<HomeProvider, String>(
-              selector: (_, provider) => provider.title,
-              builder: (_, value, child) => Text(
-                value,
-                style: context.textTheme.titleLarge,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSizes.mediumWidthDimens,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Selector<HomeProvider, String>(
+                selector: (_, provider) => provider.title,
+                builder: (_, value, child) => Text(
+                  value,
+                  style: context.textTheme.titleLarge,
+                ),
               ),
             ),
-          ),
-          AppSizes.largeHeightDimens.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () => apiCallSafety(
-                  provider.checkConnection,
-                  onStart: () async => showLoading(context, true),
-                  onCompleted: () async => showLoading(context, false),
-                ),
-                child: Text(LocaleKeys.home_call_api_success.tr()),
-              ),
-              AppSizes.mediumWidthDimens.horizontalSpace,
-              ElevatedButton(
-                onPressed: () => apiCallSafety(
-                  provider.checkConnectionFailed,
-                  onStart: () async => showLoading(context, true),
-                  onCompleted: () async => showLoading(context, false),
-                  onError: (err) async => showDialog(
-                    context: context,
-                    builder: (_) => WErrorDialog(
-                      dialogType: DialogType.error,
-                      content: err,
-                      onActionProceed: () {},
+            AppSizes.largeHeightDimens.verticalSpace,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => apiCallSafety(
+                      provider.checkConnection,
+                      onStart: () async => showLoading(context, true),
+                      onCompleted: () async => showLoading(context, false),
+                      onSuccess: (data) async => Navigator.of(context)
+                          .pushNamed(AppRoutes.loginSuccess),
+                    ),
+                    child: Text(
+                      LocaleKeys.home_call_api_success.tr(),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
-                child: Text(LocaleKeys.home_call_api_error.tr()),
-              ),
-            ],
-          ),
-          AppSizes.largeHeightDimens.verticalSpace,
-          ElevatedButton(
-            onPressed: () => context.setLocale(
-              context.locale.languageCode ==
-                      AppLanguages.supportedLocales.first.languageCode
-                  ? AppLanguages.supportedLocales.last
-                  : AppLanguages.supportedLocales.first,
+                AppSizes.mediumWidthDimens.horizontalSpace,
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => apiCallSafety(
+                      provider.checkConnectionFailed,
+                      onStart: () async => showLoading(context, true),
+                      onCompleted: () async => showLoading(context, false),
+                      onError: (err) async => showDialog(
+                        context: context,
+                        builder: (_) => WErrorDialog(
+                          dialogType: DialogType.error,
+                          content: err,
+                          onActionProceed: () {},
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      LocaleKeys.home_call_api_error.tr(),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            child: Text(LocaleKeys.home_change_locale.tr()),
-          ),
-        ],
+            AppSizes.largeHeightDimens.verticalSpace,
+            ElevatedButton(
+              onPressed: () => context.setLocale(
+                context.locale.languageCode ==
+                        AppLanguages.supportedLocales.first.languageCode
+                    ? AppLanguages.supportedLocales.last
+                    : AppLanguages.supportedLocales.first,
+              ),
+              child: Text(LocaleKeys.home_change_locale.tr()),
+            ),
+          ],
+        ),
       ),
     );
   }

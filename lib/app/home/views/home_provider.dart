@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:tfc/app/home/domain/services/home_service.dart';
-import 'package:tfc/base/presentation/providers/loading_provider.dart';
+import 'package:tfc/base/presentation/providers/base_provider.dart';
 import 'package:tfc/generated/locale_keys.g.dart';
 import 'package:tfc/services/rest_api/models/base_response.dart';
 
-class HomeProvider extends LoadingProvider {
+class HomeProvider extends BaseProvider {
   final HomeService _homeService;
 
   HomeProvider(this._homeService);
