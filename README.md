@@ -125,7 +125,7 @@ AppConfig(env: Env.dev());
 ### Running application from environment
 To run app in dev environment consider:
 ```
-flutter run --release -t lib/main_dev
+flutter run --release -t lib/main_prod.dart
 ```
 
 ### Configurate localization
