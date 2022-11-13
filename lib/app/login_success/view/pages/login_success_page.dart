@@ -28,7 +28,7 @@ class LoginSuccessPage extends PageStateless<LoginSuccessProvider> {
               ElevatedButton(
                 onPressed: () => apiCallSafety(
                   () => provider.logout(),
-                ),
+                ).then((value) => context.navigator.pop()),
                 child: const Text('Logout'),
               )
             ],

@@ -7,6 +7,7 @@ import 'package:tfc/app/common/presentation/widgets/dialog/w_error_dialog.dart';
 import 'package:tfc/app/home/views/home_provider.dart';
 import 'package:tfc/base/presentation/pages/p_stateless.dart';
 import 'package:tfc/config/app_languages.dart';
+import 'package:tfc/config/app_routers.dart';
 import 'package:tfc/config/app_sizes.dart';
 import 'package:tfc/generated/locale_keys.g.dart';
 import 'package:tfc/utils/extensions/context_extension.dart';
@@ -48,8 +49,8 @@ class HomePage extends PageStateless<HomeProvider> {
                         provider.checkConnection,
                         onStart: () async => showLoading(context, true),
                         onCompleted: () async => showLoading(context, false),
-                        onSuccess: (data) async => context.navigator.go(
-                          '/home/login-success/home/login-success',
+                        onSuccess: (data) async => context.navigator.push(
+                          AppRoutes.instance.loginSuccess,
                         ),
                       ),
                       child: Text(

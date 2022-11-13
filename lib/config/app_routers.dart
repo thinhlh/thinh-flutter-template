@@ -22,43 +22,25 @@ class AppRoutes {
 
   late final GoRouter router = GoRouter(
     debugLogDiagnostics: kDebugMode,
-    urlPathStrategy: UrlPathStrategy.path,
     initialLocation: initial,
-    errorBuilder: (context, state) => const Scaffold(
-      body: Center(
+    errorBuilder: (context, state) => Scaffold(
+      appBar: AppBar(
+        leading: const BackButton(),
+      ),
+      body: const Center(
         child: Text('404'),
       ),
     ),
     routes: <GoRoute>[
       GoRoute(
-          path: home,
-          builder: (context, state) => RouteUtils.createPageProvider(
-                provider: (_) => HomeProvider(
-                  context.read<HomeService>(),
-                ),
-                child: const HomePage(),
-              ),
-          routes: <GoRoute>[
-            GoRoute(
-                path: 'login-success',
-                builder: (context, state) => RouteUtils.createPageProvider(
-                      provider: (_) => LoginSuccessProvider(
-                        context.read<LoginSuccessService>(),
-                      ),
-                      child: const LoginSuccessPage(),
-                    ),
-                routes: <GoRoute>[
-                  GoRoute(
-                    path: 'home',
-                    builder: (context, state) => RouteUtils.createPageProvider(
-                      provider: (_) => HomeProvider(
-                        context.read<HomeService>(),
-                      ),
-                      child: const HomePage(),
-                    ),
-                  ),
-                ])
-          ]),
+        path: home,
+        builder: (context, state) => RouteUtils.createPageProvider(
+          provider: (_) => HomeProvider(
+            context.read<HomeService>(),
+          ),
+          child: const HomePage(),
+        ),
+      ),
       GoRoute(
         path: loginSuccess,
         builder: (context, state) => RouteUtils.createPageProvider(
