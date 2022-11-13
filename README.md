@@ -4,12 +4,13 @@
 
 ## Documentation
 
-[1. Installation](#installation)
-[2. Folder structure](#folder-structure)
-[3. How to use](#how-to-use)
-[4. Application configuration](#application-configuration)
-[5. Dependencies](#application-dependencies)
-[6. License](#license)
+1. [Installation](#installation)
+2. [Folder structure](#folder-structure)
+3. [How to use](#how-to-use)
+4. [Application configuration](#application-configuration)
+5. [Dependencies](#application-dependencies)
+6. [License](#license)
+
 
 ## Installation
 
