@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:logger/logger.dart';
 
 abstract class LoggerUtils {

@@ -70,6 +70,9 @@ class _WLoadingState extends State<WLoading>
   Widget _itemBuilder(int index) => widget.itemBuilder != null
       ? widget.itemBuilder!(context, index)
       : DecoratedBox(
-          decoration:
-              BoxDecoration(shape: BoxShape.circle, color: widget.color));
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: widget.color,
+          ),
+        );
 }

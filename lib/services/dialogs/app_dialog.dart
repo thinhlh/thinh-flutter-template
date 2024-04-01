@@ -24,15 +24,12 @@ class AppDialog {
   Future showAppDialog(BuildContext context, Widget dialog,
       {bool dismissble = false}) {
     dismissAppDialog();
-    // print('Show');
     isShowing = true;
     return showDialog(
       context: context,
       barrierDismissible: dismissble,
       builder: (dialogContext) {
-        // print('Build');
         if (!isShowing) {
-          // print('Pop After Build');
           dismissAppDialog();
         } else {
           _context = dialogContext;
@@ -47,9 +44,7 @@ class AppDialog {
 
   void dismissAppDialog() {
     isShowing = false;
-    // print('Dismiss');
     if (_context != null) {
-      // print('Pop');
       try {
         if (Navigator.canPop(_context!)) {
           Navigator.of(_context!).pop(true);

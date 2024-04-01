@@ -52,6 +52,11 @@ class HomePage extends PageStateless<HomeProvider> {
                         onSuccess: (data) async => context.navigator.push(
                           AppRoutes.instance.loginSuccess,
                         ),
+                        onError: (error) async {
+                          context.navigator.push(
+                            AppRoutes.instance.loginSuccess,
+                          );
+                        },
                       ),
                       child: Text(
                         LocaleKeys.home_call_api_success.tr(),
